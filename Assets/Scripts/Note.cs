@@ -14,6 +14,7 @@ public class Note : MonoBehaviour
     [SerializeField] private bool _isSlider;
     private Transform _sliderEraser;
     [SerializeField] private float _sliderEraserSize;
+    public Colors noteColor;
 
 
 
@@ -37,6 +38,7 @@ public class Note : MonoBehaviour
         if (!_isSlider)
         {
             Destroy(gameObject);
+            return;
         }
 
         _sliderEraser = transform.GetChild(0);
