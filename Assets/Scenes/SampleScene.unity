@@ -1139,6 +1139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keypressed: 0
+  points: 0
 --- !u!61 &1997506096
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1345,3 +1346,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nota: {fileID: 3161604335993631536, guid: f2eefec77cf8f844a82bcfbeb62b709a, type: 3}
+  Timer: 0
+  index: 1
+  _textFile: {fileID: 4900000, guid: ccd3714d880bb4044ae034797b39b8c9, type: 3}
