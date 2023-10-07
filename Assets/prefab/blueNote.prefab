@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5304810091282326009}
   - component: {fileID: 3823778324535744012}
   m_Layer: 0
-  m_Name: nota
+  m_Name: blueNote
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

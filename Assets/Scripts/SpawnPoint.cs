@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-    [SerializeField] GameObject nota;
+    [SerializeField] GameObject blue;
+    [SerializeField] GameObject violet;
+    [SerializeField] GameObject red;
+    [SerializeField] GameObject green;
     [SerializeField] GameObject holdNote;
     [SerializeField] GameObject currentObject;
     [SerializeField] float Timer;
@@ -14,7 +17,7 @@ public class SpawnPoint : MonoBehaviour
 
     [SerializeField] private TextAsset _textFile;
     private Dictionary<int, (int, float, int)> miDiccionario = new Dictionary<int, (int, float, int)>();
-
+    Colors colors;
 
     void Start()
     {
@@ -35,32 +38,48 @@ public class SpawnPoint : MonoBehaviour
     {
         print($"Note: {noteNum}");
         
-        switch (noteType)
+        if(noteType==2)
         {
-            case 1:
-                currentObject=nota;
-                break;
-            case 2:
-                currentObject=holdNote;
-                break;
+            currentObject=holdNote;
         }
+        else
+        {
 
         switch (noteNum)  // cuando tengamos los carriles hechos hay que cambiar esto
         {
             case 1:
-                yPosition=transform.position.y;
+                currentObject=blue;
                 break;
             case 2:
-                yPosition=transform.position.y;
+                currentObject=violet;
                 break;
             case 3:
-                yPosition=transform.position.y;
+                currentObject=red;
                 break;
             case 4:
-                yPosition=transform.position.y;
+                currentObject=green;
                 break;
             default:
                 print($"Error: Valor de nota invalido: {noteNum}");
+                break;
+        }
+        }
+        switch (colors)  // cuando tengamos los carriles hechos hay que cambiar esto
+        {
+            case Colors.Blue:
+          //      yPosition=;
+                break;
+            case Colors.Violet:
+           //      yPosition=;
+                break;
+            case Colors.Red:
+             //    yPosition=;
+                break;
+            case Colors.Green:
+               //  yPosition=;
+                break;
+            default:
+                print($"Error: no esta puesto el color de enum");
                 break;
         }
         Instantiate(currentObject, transform.position, transform.rotation);  // cuando tengamos los carriles cambiar el transform.position por yPosition
