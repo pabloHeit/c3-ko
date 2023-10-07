@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Inputs : MonoBehaviour
 {
     [Header("Inputs")]
@@ -12,9 +12,11 @@ public class Inputs : MonoBehaviour
     [SerializeField]private KeyCode red = KeyCode.E;
     [SerializeField]private KeyCode green = KeyCode.R;
 
-    [SerializeField] public int points;
+    [SerializeField] private int _points;
 
-    
+    [SerializeField] TextMeshProUGUI pointsText;
+
+
     Colors keyPressed;
 
     private void Update(){
@@ -41,7 +43,6 @@ public class Inputs : MonoBehaviour
         keyPressed=Colors.none;
         
     }
-
     private void OnTriggerStay2D(Collider2D other) {
 
         Note note = other.gameObject.GetComponent<Note>();
@@ -49,6 +50,14 @@ public class Inputs : MonoBehaviour
         if(note.noteColor == keyPressed)
         {
             note.OnPressed(transform);
+            OnGetPoints(10);
         }
     }
+
+    private void OnGetPoints(int points)
+    {
+        _points += points;
+        pointsText.text = _points.ToString();
+    }
+
 }
