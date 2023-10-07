@@ -810,6 +810,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1035987523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1035987525}
+  - component: {fileID: 1035987524}
+  m_Layer: 0
+  m_Name: enumManagerws
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1035987524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035987523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd287ab2d1f31f642895e321cfcc9d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1035987525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035987523}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.17, y: -0.042445183, z: 1.3507991}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1047777839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,6 +1230,7 @@ MonoBehaviour:
   _speed: 3
   _isSlider: 1
   _sliderEraserSize: 0
+  noteColor: 0
 --- !u!1 &1707284508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,7 +1430,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b6eb4a5c7566343897e060f7a9a307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keypressed: 0
+  blue: 113
+  violet: 119
+  red: 101
+  green: 114
   points: 0
 --- !u!61 &1997506096
 BoxCollider2D:
@@ -1593,6 +1641,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nota: {fileID: 3161604335993631536, guid: f2eefec77cf8f844a82bcfbeb62b709a, type: 3}
+  holdNote: {fileID: 0}
+  currentObject: {fileID: 0}
   Timer: 0
   index: 1
+  yPosition: 0
   _textFile: {fileID: 4900000, guid: ccd3714d880bb4044ae034797b39b8c9, type: 3}
