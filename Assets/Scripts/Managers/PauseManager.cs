@@ -5,16 +5,22 @@ using UnityEngine;
 public class PauseManager : MonoBehaviour
 {
     private bool _isPaused = false;
+    [SerializeField] private GameObject _pauseScreen;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = _isPaused ? 1 : 0;
-            _isPaused = !_isPaused;
-
-            print("Tocado el scape");
+            TogglePause();
         }
+    }
 
+    private void TogglePause()
+    {
+        _isPaused = !_isPaused;
+        _pauseScreen.SetActive(_isPaused);
+        Time.timeScale = _isPaused ? 0 : 1;
+
+        //print("Tocado el scape");
     }
 }
