@@ -8,25 +8,44 @@ using UnityEngine;
 public class Note : MonoBehaviour
 {    
     [Header("Values")]
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private float _speed = 3f;
+
+    [Header("Slider")]
+    [SerializeField] private bool _isSlider;
+    private Transform _sliderEraser;
+    [SerializeField] private float _sliderEraserSize;
+
+
 
     [Header("Components")]
-    private Rigidbody2D noterb;
-   
+    private Rigidbody2D _noteRb;   
 
      private void Awake()
     {
-        noterb = GetComponent<Rigidbody2D>();
-        noterb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _noteRb = GetComponent<Rigidbody2D>();
+        _noteRb.constraints = RigidbodyConstraints2D.FreezeRotation;
         
     }
 
     private void Start() {
         Vector2 direction = Vector2.left;
-        noterb.velocity = direction * speed;
+        _noteRb.velocity = direction * _speed;
     }
 
-    public void Destroy(){
-        Destroy(gameObject);
+    public void OnPressed(Transform inputPosition){
+
+        if (!_isSlider)
+        {
+            Destroy(gameObject);
+        }
+
+        _sliderEraser = transform.GetChild(0);
+
+        _sliderEraser.position = new Vector3(inputPosition.position.x, 0, 0);
+
+        SpriteRenderer sliderSprite = _sliderEraser.GetComponent<SpriteRenderer>();
+        _sliderEraserSize += _speed * Time.deltaTime;
+        sliderSprite.size = new Vector2(_sliderEraserSize, 0.19f);
+
     }
 }

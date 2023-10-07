@@ -30,7 +30,7 @@ public class SpawnPoint : MonoBehaviour
 
     private void SpawnNote(int noteNum)
     {
-        print($"Note: {noteNum}");
+        //print($"Note: {noteNum}");
 
         switch (noteNum)
         {
@@ -78,10 +78,10 @@ public class SpawnPoint : MonoBehaviour
             miDiccionario[miDiccionario.Count + 1] = (-1, -1);
 
             Debug.Log("Notas musicales: ");
-            foreach (KeyValuePair<int, (int, float)> kvp in miDiccionario)
+            /*foreach (KeyValuePair<int, (int, float)> kvp in miDiccionario)
             {
                 Debug.Log("Clave: " + kvp.Key + ", Valor: " + kvp.Value);
-            }
+            }*/
         }
         else
         {

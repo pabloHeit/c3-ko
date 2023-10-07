@@ -11,7 +11,9 @@ public class DeletePoint : MonoBehaviour
     }
     
     private void OnTriggerEnter2D(Collider2D other) {
-        Note note = other.gameObject.GetComponent<Note>();
-        note.Destroy();
+        if (other.gameObject.GetComponent<Note>())
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
