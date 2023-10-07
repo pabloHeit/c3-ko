@@ -16,47 +16,83 @@ public class Inputs : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI pointsText;
 
+    [SerializeField] private bool _onCollision = false;
+    [SerializeField] private bool _hasPressed = false;
 
-    Colors keyPressed;
+    [SerializeField] Colors keyPressed;
 
     private void Update(){
-        if(Input.GetKey(blue))
+        //Si dejamos esto en GetKey no va a parar de restar puntos(es muy sensible)
+        //Pero si lo ponemos en GetKeyDown directamente le cuesta una bocha en detectar las notas
+        //No se me ocurrio que hacer
+        /*if (_hasPressed && !_onCollision)
+        {
+            OnLosePoints(10);
+            _hasPressed = false;
+        }*/
+
+        if (Input.GetKey(blue))
         {
            keyPressed=Colors.Blue;
+            _hasPressed = true;
            return;
         }
         if(Input.GetKey(violet))
         {
            keyPressed=Colors.Violet;
-           return;
+            _hasPressed = true;
+            return;
         }
         if(Input.GetKey(red))
         {
             keyPressed=Colors.Red;
+            _hasPressed = true;
             return;
         }   
         if(Input.GetKey(green))
         {
             keyPressed=Colors.Green;
+            _hasPressed = true;
             return;
         }
         keyPressed=Colors.none;
-        
+        _hasPressed = false;
+
     }
     private void OnTriggerStay2D(Collider2D other) {
 
         Note note = other.gameObject.GetComponent<Note>();
-
-        if(note.noteColor == keyPressed)
+        if (note)
         {
-            note.OnPressed(transform);
-            OnGetPoints(10);
+            _onCollision = true;
+
+            if (_hasPressed && note._isActive)
+            {
+                if(note.noteColor == keyPressed)
+                {
+                    note.OnPressed(transform);
+                    OnGetPoints(15);
+                }
+                else
+                {
+                    OnLosePoints(10);
+                    note._isActive = false;
+                }
+                keyPressed = Colors.none;
+                _hasPressed = false;
+            }
         }
     }
 
-    private void OnGetPoints(int points)
+    public void OnGetPoints(int points)
     {
         _points += points;
+        pointsText.text = _points.ToString();
+    }
+
+    public void OnLosePoints(int points)
+    {
+        _points -= points;
         pointsText.text = _points.ToString();
     }
 

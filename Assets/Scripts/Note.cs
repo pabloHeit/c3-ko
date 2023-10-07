@@ -9,6 +9,7 @@ public class Note : MonoBehaviour
 {    
     [Header("Values")]
     [SerializeField] private float _speed = 3f;
+    [SerializeField] public bool _isActive = true;
 
     [Header("Slider")]
     [SerializeField] private bool _isSlider;
