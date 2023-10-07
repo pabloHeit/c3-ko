@@ -8,12 +8,14 @@ public class Inputs : MonoBehaviour
     private KeyCode key = KeyCode.Space;
 
     [SerializeField]private bool keypressed;
+    [SerializeField]public int points;
+
 
     private void Update(){
     if(Input.GetKey(key))
         {
             keypressed=true;
-            print("hola");
+            
         }
         else
         {
@@ -28,9 +30,8 @@ public class Inputs : MonoBehaviour
         
         if(keypressed==true)
         {
-            
             note.Destroy();
-        
+            points+=50;
         }
     }
 }
