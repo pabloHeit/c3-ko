@@ -46,7 +46,7 @@ public class Note : MonoBehaviour
         _sliderEraser.position = new Vector3(inputPosition.position.x, 0, 0);
 
         SpriteRenderer sliderSprite = _sliderEraser.GetComponent<SpriteRenderer>();
-        _sliderEraserSize += _speed * Time.deltaTime;
+        _sliderEraserSize += - _speed * Time.deltaTime;
         sliderSprite.size = new Vector2(_sliderEraserSize, 0.19f);
 
     }

@@ -11,6 +11,7 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField] GameObject green;
     [SerializeField] GameObject holdNote;
     [SerializeField] GameObject currentObject;
+
     [SerializeField] float Timer;
     [SerializeField] int index = 1;
     [SerializeField] float yPosition;
@@ -40,7 +41,7 @@ public class SpawnPoint : MonoBehaviour
         
         if(noteType==2)
         {
-            currentObject=holdNote;
+            currentObject = holdNote;
         }
         else
         {
@@ -48,16 +49,16 @@ public class SpawnPoint : MonoBehaviour
         switch (noteNum)  // cuando tengamos los carriles hechos hay que cambiar esto
         {
             case 1:
-                currentObject=blue;
+                currentObject= blue;
                 break;
             case 2:
-                currentObject=violet;
+                currentObject= violet;
                 break;
             case 3:
-                currentObject=red;
+                currentObject= red;
                 break;
             case 4:
-                currentObject=green;
+                currentObject= green;
                 break;
             default:
                 print($"Error: Valor de nota invalido: {noteNum}");
