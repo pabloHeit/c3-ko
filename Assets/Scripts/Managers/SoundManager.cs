@@ -2,22 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
-
     public AudioClip backgroundMusic;
+    AudioSource audioSource;
 
-    // Start is called before the first frame update
     void Start()
     {
-        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        InitMusic();
+    }
+
+    public void InitMusic()
+    {
         audioSource.clip = backgroundMusic;
         audioSource.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void OnShotHitSound(AudioClip sound)
     {
-        
+        audioSource.PlayOneShot(sound);
+
     }
 }

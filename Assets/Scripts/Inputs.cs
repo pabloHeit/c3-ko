@@ -26,6 +26,13 @@ public class Inputs : MonoBehaviour
 
     [SerializeField] private PlayerAnimations _playerAnimations;
 
+    [Header("Sounds")]
+    [SerializeField] private SoundManager _soundManager;
+    [SerializeField] private AudioClip _missedSound;
+    [SerializeField] private AudioClip _goodSound;
+    [SerializeField] private AudioClip _perfectSound;
+
+
     private void Awake() {
         perfect = FindObjectOfType<PerfectHitbox>();
         sign = FindObjectOfType<TimingSign>();
@@ -87,11 +94,14 @@ public class Inputs : MonoBehaviour
                     {
                         OnGetPoints(30);
                         sign.ChangeSprite(sign.perfect);
+                        _soundManager.OnShotHitSound(_perfectSound);
+
                     }
                     else
                     {
                         OnGetPoints(15);
                         sign.ChangeSprite(sign.good);
+                        _soundManager.OnShotHitSound(_goodSound);
                     }
                     perfect.touch=false;
                     note.OnPressed(transform);
@@ -103,6 +113,7 @@ public class Inputs : MonoBehaviour
                     OnLosePoints(10);
                     
                     _playerAnimations.ChangeAnimation(keyPressed, true);
+                    _soundManager.OnShotHitSound(_missedSound);
                 }
                 keyPressed = NoteDirection.none;
                 _hasPressed = false;
