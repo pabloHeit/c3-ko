@@ -33,6 +33,8 @@ public class Inputs : MonoBehaviour
     [SerializeField] private AudioClip _goodSound;
     [SerializeField] private AudioClip _perfectSound;
 
+    [SerializeField] private Animator _enemyAnimator;
+
 
     private void Awake() {
         perfect = FindObjectOfType<PerfectHitbox>();
@@ -43,7 +45,6 @@ public class Inputs : MonoBehaviour
     private void Update(){
         
         InputKeys();
-
         Comprobation();
     }
 
@@ -133,10 +134,7 @@ public class Inputs : MonoBehaviour
             isOnInput=false;
         }
 
-    }
-
-
-    
+    }    
 
     public void OnGetPoints(int points)
     {
