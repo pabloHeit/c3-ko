@@ -34,9 +34,11 @@ public class SpawnPoint : MonoBehaviour
 
     private DataSaver _dataSaver;
 
+    [SerializeField] private float tiempoFinal;
 
     void Start()
     {
+        
         _dataSaver = GameObject.FindGameObjectWithTag("DataSaver").GetComponent<DataSaver>();
         
         ConvertTxtToDictionary();
@@ -64,9 +66,10 @@ public class SpawnPoint : MonoBehaviour
             }
         }
 
+        tiempoFinal = timeToReachInput + audioSource.GetComponent<AudioSource>().clip.length;
         if (index >= _dataSaver.totalNoteQuantity)
         {
-            if (realTime >= (timeToReachInput + travelDistance * 3))
+            if (realTime >= tiempoFinal)
             {
                 EndGame();
             }
