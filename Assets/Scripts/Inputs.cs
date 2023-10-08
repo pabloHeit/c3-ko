@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
 public class Inputs : MonoBehaviour
 {
     [Header("Inputs")]
     private KeyCode key = KeyCode.Space;
 
-    [SerializeField]private KeyCode _downKeycode;
-    [SerializeField]private KeyCode _upKeycode;
-    [SerializeField]private KeyCode _rightKeycode;
-    [SerializeField]private KeyCode _leftKeycode;
+    [SerializeField] private KeyCode _downKeycode;
+    [SerializeField] private KeyCode _upKeycode;
+    [SerializeField] private KeyCode _rightKeycode;
+    [SerializeField] private KeyCode _leftKeycode;
 
     [SerializeField] private int _points;
     [SerializeField] private bool isOnInput;
@@ -35,15 +36,40 @@ public class Inputs : MonoBehaviour
 
     [SerializeField] private Animator _enemyAnimator;
 
+    [SerializeField] private List<Note> notasEnRango = new List<Note>();
 
-    private void Awake() {
+    private void Awake()
+    {
         perfect = FindObjectOfType<PerfectHitbox>();
         sign = FindObjectOfType<TimingSign>();
         hits = FindObjectOfType<SpriteHits>();
     }
 
-    private void Update(){
-        
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Note nota = other.gameObject.GetComponent<Note>();
+        if (nota)
+        {
+            notasEnRango.Add(nota);
+            isOnInput = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        Note nota = other.gameObject.GetComponent<Note>();
+        if (nota)
+        {
+            notasEnRango.Remove(nota);
+            if (notasEnRango.Count == 0)
+            {
+                isOnInput = false;
+            }
+        }
+    }
+
+    private void Update()
+    {
         InputKeys();
         Comprobation();
     }
@@ -52,42 +78,42 @@ public class Inputs : MonoBehaviour
     {
         if (Input.GetKeyDown(_downKeycode))
         {
-           keyPressed=NoteDirection.Down;
-            _hasPressed = true;
-           return;
-        }
-        if(Input.GetKeyDown(_upKeycode))
-        {
-           keyPressed=NoteDirection.Up;
+            keyPressed = NoteDirection.Down;
             _hasPressed = true;
             return;
         }
-        if(Input.GetKeyDown(_rightKeycode))
+        if (Input.GetKeyDown(_upKeycode))
         {
-            keyPressed=NoteDirection.Right;
-            _hasPressed = true;
-            return;
-        }   
-        if(Input.GetKeyDown(_leftKeycode))
-        {
-            keyPressed=NoteDirection.Left;
+            keyPressed = NoteDirection.Up;
             _hasPressed = true;
             return;
         }
-        keyPressed =NoteDirection.none;
+        if (Input.GetKeyDown(_rightKeycode))
+        {
+            keyPressed = NoteDirection.Right;
+            _hasPressed = true;
+            return;
+        }
+        if (Input.GetKeyDown(_leftKeycode))
+        {
+            keyPressed = NoteDirection.Left;
+            _hasPressed = true;
+            return;
+        }
+        keyPressed = NoteDirection.none;
         _hasPressed = false;
     }
 
-
-
     private void Comprobation()
     {
-        if(_hasPressed && isOnInput)
+        if (_hasPressed && isOnInput)
         {
-            
-                if(note.noteDirection == keyPressed)
+            if (notasEnRango.Count > 0)
+            {
+                Note nota = notasEnRango[0];
+                if (nota.noteDirection == keyPressed)
                 {
-                    if(perfect.touch)
+                    if (perfect.touch)
                     {
                         OnGetPoints(100);
                         sign.ChangeSprite(sign.perfect);
@@ -102,44 +128,24 @@ public class Inputs : MonoBehaviour
                         hits.ChangeSprite();
                         _soundManager.OnShotHitSound(_goodSound);
                     }
-                _enemyAnimator.Play("EnemyHit");
-                    perfect.touch=false;
-                    note.OnPressed(transform);
-
+                    _enemyAnimator.Play("EnemyHit");
+                    perfect.touch = false;
+                    nota.OnPressed(transform);
                     _playerAnimations.ChangeAnimation(keyPressed);
                 }
                 else
                 {
                     OnLosePoints(10);
-                    
                     _playerAnimations.ChangeAnimation(keyPressed, true);
                     _soundManager.OnShotHitSound(_missedSound);
                 }
                 keyPressed = NoteDirection.none;
                 _hasPressed = false;
-            
+            }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        note = other.gameObject.GetComponent<Note>();
-        if(note)
-        {
-            isOnInput=true;
-        }
-
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        note = other.gameObject.GetComponent<Note>();
-        if(note)
-        {
-            isOnInput=false;
-        }
-
-    }    
-
-    public void OnGetPoints(int points)
+    private void OnGetPoints(int points)
     {
         _points += points;
         pointsText.text = _points.ToString();
@@ -150,5 +156,4 @@ public class Inputs : MonoBehaviour
         _points -= points;
         pointsText.text = _points.ToString();
     }
-
 }
