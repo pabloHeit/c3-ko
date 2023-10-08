@@ -13,7 +13,7 @@ public class Dead : MonoBehaviour
     void Start()
     {   
         Image image = GetComponent<Image>();
-        image.sprite =attack1;
+        //image.sprite =attack1;
     }
 
     // Update is called once per frame
