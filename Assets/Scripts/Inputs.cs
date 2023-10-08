@@ -21,6 +21,7 @@ public class Inputs : MonoBehaviour
     [SerializeField] private bool _hasPressed = false;
     private PerfectHitbox perfect;
     private TimingSign sign;
+    private SpriteHits hits;
     [SerializeField] NoteDirection keyPressed;
     private Note note;
 
@@ -36,7 +37,7 @@ public class Inputs : MonoBehaviour
     private void Awake() {
         perfect = FindObjectOfType<PerfectHitbox>();
         sign = FindObjectOfType<TimingSign>();
-
+        hits = FindObjectOfType<SpriteHits>();
     }
 
     private void Update(){
@@ -44,13 +45,6 @@ public class Inputs : MonoBehaviour
         InputKeys();
 
         Comprobation();
-        
-
-        
-
-        
-        
-
     }
 
     private void InputKeys()
@@ -92,15 +86,17 @@ public class Inputs : MonoBehaviour
                 {
                     if(perfect.touch)
                     {
-                        OnGetPoints(30);
+                        OnGetPoints(100);
                         sign.ChangeSprite(sign.perfect);
+                        hits.ChangeSprite();
                         _soundManager.OnShotHitSound(_perfectSound);
 
                     }
                     else
                     {
-                        OnGetPoints(15);
+                        OnGetPoints(50);
                         sign.ChangeSprite(sign.good);
+                        hits.ChangeSprite();
                         _soundManager.OnShotHitSound(_goodSound);
                     }
                     perfect.touch=false;
