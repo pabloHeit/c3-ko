@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class SpawnPoint : MonoBehaviour
 {
@@ -26,22 +28,29 @@ public class SpawnPoint : MonoBehaviour
 
     private bool _isPlaying = false;
 
+    private float travelDistance = 0;
+
     [SerializeField] private Transform _input;
+
+    private DataSaver _dataSaver;
 
 
     void Start()
     {
+        _dataSaver = GameObject.FindGameObjectWithTag("DataSaver").GetComponent<DataSaver>();
+        
         ConvertTxtToDictionary();
 
-        float travelDistance = Mathf.Ceil(transform.position.x) - Mathf.Floor(_input.position.x);
+        travelDistance = Mathf.Ceil(transform.position.x) - Mathf.Floor(_input.position.x);
         timeToReachInput = travelDistance / _down.GetComponent<Note>().GetSpeed()  - 0.5f;
 
     }
 
+
     void Update()
     {
         realTime += Time.deltaTime;
-        
+
         CheckNoteSpawn();
         //print($"realTime: {realTime}");
         //print($"timeToReachInput: {timeToReachInput}");
@@ -54,6 +63,18 @@ public class SpawnPoint : MonoBehaviour
                 audioSource.GetComponent<AudioSource>().Play();
             }
         }
+
+        if (index >= _dataSaver.totalNoteQuantity)
+        {
+            if (realTime >= (timeToReachInput + travelDistance * 3))
+            {
+                EndGame();
+            }
+        }
+    }
+    private void EndGame()
+    {
+        SceneManager.LoadScene(sceneBuildIndex: 2);
     }
 
     private void CheckNoteSpawn()
@@ -162,12 +183,16 @@ public class SpawnPoint : MonoBehaviour
                     //noteTime = GetRealNoteTime(noteTime);
                     int noteType = int.Parse(keyValue[2].Trim());
                     miDiccionario[indexReal] = (noteDirection, noteTime, noteType);
+
                 }
 
                 indexReal++;
             }
 
             miDiccionario[miDiccionario.Count + 1] = (-1, -1, 1);
+
+            //gUARDAR cantidad de notas
+            _dataSaver.totalNoteQuantity = miDiccionario.Count;
 
             Debug.Log("Notas musicales: ");
             foreach (KeyValuePair<int, (int, float, int)> kvp in miDiccionario)

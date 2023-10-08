@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class Inputs : MonoBehaviour
 {
@@ -28,6 +30,10 @@ public class Inputs : MonoBehaviour
 
     [SerializeField] private PlayerAnimations _playerAnimations;
 
+    [Header("DataSaver")]
+    private DataSaver _dataSaver;
+
+
     [Header("Sounds")]
     [SerializeField] private SoundManager _soundManager;
     [SerializeField] private AudioClip _missedSound;
@@ -43,6 +49,8 @@ public class Inputs : MonoBehaviour
         perfect = FindObjectOfType<PerfectHitbox>();
         sign = FindObjectOfType<TimingSign>();
         hits = FindObjectOfType<SpriteHits>();
+        _dataSaver = GameObject.FindGameObjectWithTag("DataSaver").GetComponent<DataSaver>();
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -149,11 +157,18 @@ public class Inputs : MonoBehaviour
     {
         _points += points;
         pointsText.text = _points.ToString();
+        UpdateToDataSaver();
     }
 
     public void OnLosePoints(int points)
     {
         _points -= points;
         pointsText.text = _points.ToString();
+        UpdateToDataSaver();
+    }
+
+    private void UpdateToDataSaver()
+    {
+        _dataSaver.SetPoints(_points);
     }
 }
