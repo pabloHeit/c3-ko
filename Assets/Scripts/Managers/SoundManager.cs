@@ -7,17 +7,31 @@ public class SoundManager : MonoBehaviour
 {
     public AudioClip backgroundMusic;
     AudioSource audioSource;
+    private float _playTime;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        InitMusic();
+        print(audioSource.time);
+        //audioSource.clip = backgroundMusic;
+        _playTime = audioSource.time;
+
+    }
+
+    public void SelectSong(AudioClip song)
+    {
+        audioSource.clip = song;
     }
 
     public void InitMusic()
     {
-        audioSource.clip = backgroundMusic;
         audioSource.Play();
+    }
+
+    public float GetPlayTime()
+    {
+        //_playTime = audioSource.time;
+        return _playTime;
     }
 
 

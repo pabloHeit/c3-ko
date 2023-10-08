@@ -8,7 +8,7 @@ using UnityEngine;
 public class Note : MonoBehaviour
 {    
     [Header("Values")]
-    [SerializeField] private float _speed = 3f;
+    [SerializeField] private float _speed = 2f;
     [SerializeField] public bool _isActive = true;
 
     [Header("Slider")]
@@ -20,15 +20,16 @@ public class Note : MonoBehaviour
     [SerializeField] private float beatTempo;
 
     [Header("Components")]
-    private Rigidbody2D _noteRb;   
-    
-    private void Start() {
-        beatTempo = beatTempo/60;
+    private Rigidbody2D _noteRb;
+
+    private void Awake()
+    {
+        _speed = ReloadSpeed();
     }
 
     void Update () 
     {
-        transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
+        transform.position -= new Vector3(_speed * Time.deltaTime, 0f, 0f);
     }
 
     public void OnPressed(Transform inputPosition)
@@ -48,5 +49,16 @@ public class Note : MonoBehaviour
         _sliderEraserSize += - _speed * Time.deltaTime;
         sliderSprite.size = new Vector2(_sliderEraserSize, 0.19f);
 
+    }
+
+    private float ReloadSpeed()
+    {
+        float speed = beatTempo / 60;
+        return speed;
+    }
+
+    public float GetSpeed()
+    {
+        return ReloadSpeed();
     }
 }

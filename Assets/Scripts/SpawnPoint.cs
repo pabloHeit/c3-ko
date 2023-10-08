@@ -15,25 +15,49 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField] private TextAsset _textFile;
     private Dictionary<int, (int, float, int)> miDiccionario = new Dictionary<int, (int, float, int)>();
     private NoteDirection _noteType;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private SoundManager audioSource;
 
     [SerializeField] float Timer;
     [SerializeField] int index = 1;
     [SerializeField] float yPosition;
 
+    private float realTime = 0;
+    private float timeToReachInput;
+
+    private bool _isPlaying = false;
+
+    [SerializeField] private Transform _input;
+
+
     void Start()
     {
         ConvertTxtToDictionary();
+
+        float travelDistance = Mathf.Ceil(transform.position.x) - Mathf.Floor(_input.position.x);
+        timeToReachInput = travelDistance / _down.GetComponent<Note>().GetSpeed()  - 0.5f;
+
     }
 
     void Update()
     {
+        realTime += Time.deltaTime;
+
         CheckNoteSpawn();
+        print($"realTime: {realTime}");
+        print($"timeToReachInput: {timeToReachInput}");
+
+        if (realTime >= timeToReachInput)
+        {
+            if (audioSource.GetPlayTime() == 0 && !_isPlaying)
+            {
+                _isPlaying = true;
+                audioSource.GetComponent<AudioSource>().Play();
+            }
+        }
     }
 
     private void CheckNoteSpawn()
     {
-        float songTime = audioSource.time;
 
         // Asegúrate de que el índice esté dentro del rango del diccionario.
         if (index <= 0 || index > miDiccionario.Count)
@@ -46,11 +70,16 @@ public class SpawnPoint : MonoBehaviour
         int noteType = miDiccionario[index].Item3;
             
         // Ajusta el margen de tiempo permitido para la aparición de la nota.
-        if (songTime >= noteTimer)
+        if (realTime >= noteTimer)
         {
             SpawnNote(noteNum, noteTimer, noteType);
         }
-        
+        else
+        {
+            /*print($"SongTime - note timer: {songTime- noteTimer}");
+            print($"SongTime: {songTime}");
+            print($"SongTime: {noteTimer}");*/
+        }
     }
 
     private void SpawnNote(int noteNum, float noteTimer, int noteType)
@@ -123,6 +152,7 @@ public class SpawnPoint : MonoBehaviour
                 {
                     int noteDirection = int.Parse(keyValue[0].Trim());
                     float noteTime = float.Parse(keyValue[1].Trim());
+                    //noteTime = GetRealNoteTime(noteTime);
                     int noteType = int.Parse(keyValue[2].Trim());
                     miDiccionario[i + 1] = (noteDirection, noteTime, noteType);
                 }
@@ -140,5 +170,15 @@ public class SpawnPoint : MonoBehaviour
         {
             Debug.LogError("No se asignó un archivo de texto.");
         }
+    }
+
+    private float GetRealNoteTime(float originalNoteTime)
+    {
+        float travelDistance = transform.position.x - _input.position.x;
+        float timeToInput = travelDistance / _down.GetComponent<Note>().GetSpeed();
+
+        float realNoteTime = originalNoteTime ;
+
+        return realNoteTime;
     }
 }
