@@ -15,7 +15,7 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField] private TextAsset _textFile;
     private Dictionary<int, (int, float, int)> miDiccionario = new Dictionary<int, (int, float, int)>();
     private NoteDirection _noteType;
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
 
     [SerializeField] float Timer;
     [SerializeField] int index = 1;
@@ -24,9 +24,6 @@ public class SpawnPoint : MonoBehaviour
     void Start()
     {
         ConvertTxtToDictionary();
-
-        audioSource = GetComponent<AudioSource>();
-
     }
 
     void Update()
