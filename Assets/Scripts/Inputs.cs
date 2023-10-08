@@ -18,8 +18,13 @@ public class Inputs : MonoBehaviour
 
     [SerializeField] private bool _onCollision = false;
     [SerializeField] private bool _hasPressed = false;
+    private PerfectHitbox perfect;
 
     [SerializeField] Colors keyPressed;
+
+    private void Awake() {
+        perfect = FindObjectOfType<PerfectHitbox>();
+    }
 
     private void Update(){
         //Si dejamos esto en GetKey no va a parar de restar puntos(es muy sensible)
