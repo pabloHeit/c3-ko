@@ -13,6 +13,7 @@ public class Inputs : MonoBehaviour
     [SerializeField]private KeyCode _leftKeycode;
 
     [SerializeField] private int _points;
+    [SerializeField] private bool isOnInput;
 
     [SerializeField] TextMeshProUGUI pointsText;
 
@@ -21,6 +22,7 @@ public class Inputs : MonoBehaviour
     private PerfectHitbox perfect;
     private TimingSign sign;
     [SerializeField] NoteDirection keyPressed;
+    private Note note;
 
     [SerializeField] private PlayerAnimations _playerAnimations;
 
@@ -31,58 +33,54 @@ public class Inputs : MonoBehaviour
     }
 
     private void Update(){
-        //Si dejamos esto en GetKey no va a parar de restar puntos(es muy sensible)
-        //Pero si lo ponemos en GetKeyDown directamente le cuesta una bocha en detectar las notas
-        //No se me ocurrio que hacer
-        /*if (_hasPressed && !_onCollision)
-        {
-            OnLosePoints(10);
-            _hasPressed = false;
-        }*/
         
-        if (Input.GetKey(_downKeycode))
+        InputKeys();
+
+        Comprobation();
+        
+
+        
+
+        
+        
+
+    }
+
+    private void InputKeys()
+    {
+        if (Input.GetKeyDown(_downKeycode))
         {
            keyPressed=NoteDirection.Down;
             _hasPressed = true;
            return;
         }
-        if(Input.GetKey(_upKeycode))
+        if(Input.GetKeyDown(_upKeycode))
         {
            keyPressed=NoteDirection.Up;
             _hasPressed = true;
             return;
         }
-        if(Input.GetKey(_rightKeycode))
+        if(Input.GetKeyDown(_rightKeycode))
         {
             keyPressed=NoteDirection.Right;
             _hasPressed = true;
             return;
         }   
-        if(Input.GetKey(_leftKeycode))
+        if(Input.GetKeyDown(_leftKeycode))
         {
             keyPressed=NoteDirection.Left;
             _hasPressed = true;
             return;
         }
-
-        /*if (keyPressed !=NoteDirection.none)
-        {
-            _playerAnimations.ChangeAnimation(keyPressed);
-            print("asd");
-        }*/
         keyPressed =NoteDirection.none;
         _hasPressed = false;
-
     }
-    private void OnTriggerStay2D(Collider2D other) {
 
-        Note note = other.gameObject.GetComponent<Note>();
-        if (note)
+    private void Comprobation()
+    {
+        if(_hasPressed && isOnInput)
         {
-            _onCollision = true;
-
-            if (_hasPressed && note._isActive)
-            {
+            
                 if(note.noteDirection == keyPressed)
                 {
                     if(perfect.touch)
@@ -103,14 +101,35 @@ public class Inputs : MonoBehaviour
                 else
                 {
                     OnLosePoints(10);
-                    note._isActive = false;
+                    
                     _playerAnimations.ChangeAnimation(keyPressed, true);
                 }
                 keyPressed = NoteDirection.none;
                 _hasPressed = false;
-            }
+            
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        note = other.gameObject.GetComponent<Note>();
+        if(note)
+        {
+            isOnInput=true;
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        note = other.gameObject.GetComponent<Note>();
+        if(note)
+        {
+            isOnInput=false;
+        }
+
+    }
+
+
+    
 
     public void OnGetPoints(int points)
     {
