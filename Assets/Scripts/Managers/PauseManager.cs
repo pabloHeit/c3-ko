@@ -20,6 +20,14 @@ public class PauseManager : MonoBehaviour
     {
         _isPaused = !_isPaused;
         _pauseScreen.SetActive(_isPaused);
+        Time.timeScale = _isPaused ? 0 : 1;
+
+        //print("Tocado el scape");
+
+        if(_music.time <= 0.1f)
+        {
+            return;
+        }
 
         if (_isPaused)
         {
@@ -30,8 +38,5 @@ public class PauseManager : MonoBehaviour
             _music.Play();
         }
 
-        Time.timeScale = _isPaused ? 0 : 1;
-
-        //print("Tocado el scape");
     }
 }
