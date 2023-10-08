@@ -23,7 +23,7 @@ public class Note : MonoBehaviour
     private Rigidbody2D _noteRb;   
     
     private void Start() {
-        beatTempo=beatTempo/60;
+        beatTempo = beatTempo/60;
     }
 
     void Update () 
