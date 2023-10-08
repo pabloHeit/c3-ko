@@ -78,6 +78,8 @@ public class Inputs : MonoBehaviour
         _hasPressed = false;
     }
 
+
+
     private void Comprobation()
     {
         if(_hasPressed && isOnInput)
@@ -100,6 +102,7 @@ public class Inputs : MonoBehaviour
                         hits.ChangeSprite();
                         _soundManager.OnShotHitSound(_goodSound);
                     }
+                _enemyAnimator.Play("EnemyHit");
                     perfect.touch=false;
                     note.OnPressed(transform);
 

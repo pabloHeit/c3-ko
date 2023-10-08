@@ -2694,7 +2694,7 @@ MonoBehaviour:
   _missedSound: {fileID: 8300000, guid: faf789d9d96eaba4791cf5fc62dc0f3f, type: 3}
   _goodSound: {fileID: 8300000, guid: e43aec721e7746e4a80412d9f581d4ac, type: 3}
   _perfectSound: {fileID: 8300000, guid: e43aec721e7746e4a80412d9f581d4ac, type: 3}
-  _enemyAnimator: {fileID: 0}
+  _enemyAnimator: {fileID: 1029338735}
 --- !u!61 &1997506096
 BoxCollider2D:
   m_ObjectHideFlags: 0
