@@ -7,7 +7,7 @@ public class PlayerAnimations : MonoBehaviour
     Animator animator;
     SpriteRenderer sprite;
 
-    [SerializeField] private Sprite[] Animations;
+    [SerializeField] private AnimationClip _missedAnimation;
 
     private void Awake()
     {
@@ -15,21 +15,27 @@ public class PlayerAnimations : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    public void ChangeAnimation(Colors moveToDo)
+    public void ChangeAnimation(NoteDirection moveToDo, bool hasMissed = false)
     {
+        if (hasMissed)
+        {
+            animator.Play(_missedAnimation.name);
+            return;
+        }
+
         string animationTrigger = "";
         switch (moveToDo)
         {
-            case Colors.Blue:
-                animationTrigger = "Up";
-                break;
-            case Colors.Violet:
+            case NoteDirection.Down:
                 animationTrigger = "Down";
                 break;
-            case Colors.Red:
+            case NoteDirection.Up:
+                animationTrigger = "Up";
+                break;
+            case NoteDirection.Right:
                 animationTrigger = "Right";
                 break;
-            case Colors.Green:
+            case NoteDirection.Left:
                 animationTrigger = "Left";
 
                 break;

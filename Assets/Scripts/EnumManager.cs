@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Colors {
-    Blue,
-    Violet,
-    Red,
-    Green,
+public enum NoteDirection
+{
+    Down,
+    Up,
+    Right,
+    Left,
     none
 };
 

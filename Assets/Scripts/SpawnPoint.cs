@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-    [SerializeField] GameObject blue;
-    [SerializeField] GameObject violet;
-    [SerializeField] GameObject red;
-    [SerializeField] GameObject green;
+    [SerializeField] GameObject _down;
+    [SerializeField] GameObject _up;
+    [SerializeField] GameObject _right;
+    [SerializeField] GameObject _left;
     [SerializeField] GameObject holdNote;
     [SerializeField] GameObject currentObject;
 
     [SerializeField] private TextAsset _textFile;
     private Dictionary<int, (int, float, int)> miDiccionario = new Dictionary<int, (int, float, int)>();
-    Colors colors;
+    private NoteDirection _noteType;
     private AudioSource audioSource;
 
     [SerializeField] float Timer;
@@ -73,16 +73,16 @@ public class SpawnPoint : MonoBehaviour
             switch (noteNum)
             {
                 case 1:
-                    currentObject = blue;
+                    currentObject = _down;
                     break;
                 case 2:
-                    currentObject = violet;
+                    currentObject = _up;
                     break;
                 case 3:
-                    currentObject = red;
+                    currentObject = _right;
                     break;
                 case 4:
-                    currentObject = green;
+                    currentObject = _left;
                     break;
                 default:
                     print($"Error: Valor de nota invalido: {noteNum}");
@@ -90,24 +90,24 @@ public class SpawnPoint : MonoBehaviour
             }
         }
 
-        switch (colors)
+        /*switch (_noteType)
         {
-            case Colors.Blue:
+            case NoteDirection.Blue:
                 // yPosition = ;
                 break;
-            case Colors.Violet:
+            case NoteDirection.Violet:
                 // yPosition = ;
                 break;
-            case Colors.Red:
+            case NoteDirection.Red:
                 // yPosition = ;
                 break;
-            case Colors.Green:
+            case NoteDirection.Green:
                 // yPosition = ;
                 break;
             default:
                 print($"Error: no esta puesto el color de enum");
                 break;
-        }
+        }*/
 
         Instantiate(currentObject, transform.position, transform.rotation);
         // cuando tengamos los carriles cambiar el transform.position por yPosition
@@ -128,10 +128,10 @@ public class SpawnPoint : MonoBehaviour
 
                 if (keyValue.Length == 3)
                 {
-                    int noteColor = int.Parse(keyValue[0].Trim());
+                    int noteDirection = int.Parse(keyValue[0].Trim());
                     float noteTime = float.Parse(keyValue[1].Trim());
                     int noteType = int.Parse(keyValue[2].Trim());
-                    miDiccionario[i + 1] = (noteColor, noteTime, noteType);
+                    miDiccionario[i + 1] = (noteDirection, noteTime, noteType);
                 }
             }
 

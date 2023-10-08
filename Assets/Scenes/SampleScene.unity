@@ -751,7 +751,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -348051902, guid: ef7d57d67c996014b9564b48d9b9fbe5, type: 3}
-  m_Color: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb0f64e2a2763b4ba2a9f6aac3b12f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animations: []
+  _missedAnimation: {fileID: 7400000, guid: 2db3313c1ceccc04593e487abef0ee4b, type: 2}
 --- !u!1 &988715350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,10 +1931,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b6eb4a5c7566343897e060f7a9a307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blue: 113
-  violet: 119
-  red: 101
-  green: 114
+  _downKeycode: 274
+  _upKeycode: 273
+  _rightKeycode: 275
+  _leftKeycode: 276
   _points: 0
   pointsText: {fileID: 1656376683}
   _onCollision: 0
@@ -2148,10 +2148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22bdf7c7b8a5e6a43abe21f0c5f73caf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blue: {fileID: 3161604335993631536, guid: f2eefec77cf8f844a82bcfbeb62b709a, type: 3}
-  violet: {fileID: 3226405107574759158, guid: 9f7e1e50e3579694d850bad6801b25ff, type: 3}
-  red: {fileID: 9202380283914866624, guid: 9162cfd0c287a65428d917d2a5c52546, type: 3}
-  green: {fileID: 8664945791260399447, guid: 599d5e85940d0d9499b2d667c5952733, type: 3}
+  _down: {fileID: 3161604335993631536, guid: f2eefec77cf8f844a82bcfbeb62b709a, type: 3}
+  _up: {fileID: 3226405107574759158, guid: 9f7e1e50e3579694d850bad6801b25ff, type: 3}
+  _right: {fileID: 9202380283914866624, guid: 9162cfd0c287a65428d917d2a5c52546, type: 3}
+  _left: {fileID: 8664945791260399447, guid: 599d5e85940d0d9499b2d667c5952733, type: 3}
   holdNote: {fileID: 3272859507618714303, guid: 0dce6ce24adc83545a696b55fcdb65fc, type: 3}
   currentObject: {fileID: 0}
   _textFile: {fileID: 4900000, guid: ccd3714d880bb4044ae034797b39b8c9, type: 3}

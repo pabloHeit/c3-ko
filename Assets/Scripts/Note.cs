@@ -15,34 +15,24 @@ public class Note : MonoBehaviour
     [SerializeField] private bool _isSlider;
     private Transform _sliderEraser;
     [SerializeField] private float _sliderEraserSize;
-    public Colors noteColor;
+    public NoteDirection noteDirection;
     [SerializeField] private bool hasStarted;
     [SerializeField] private float beatTempo;
 
-
     [Header("Components")]
     private Rigidbody2D _noteRb;   
-
-    private void Awake()
-    {
-        
-        
-    }
     
     private void Start() {
         beatTempo=beatTempo/60;
     }
 
-    void Update () {
-      
-                transform.position -= new Vector3 ( beatTempo * Time.deltaTime, 0f, 0f);
-            
-        
+    void Update () 
+    {
+        transform.position -= new Vector3(beatTempo * Time.deltaTime, 0f, 0f);
     }
 
-
-
-    public void OnPressed(Transform inputPosition){
+    public void OnPressed(Transform inputPosition)
+    {
 
         if (!_isSlider)
         {

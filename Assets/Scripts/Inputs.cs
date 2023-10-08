@@ -7,10 +7,10 @@ public class Inputs : MonoBehaviour
     [Header("Inputs")]
     private KeyCode key = KeyCode.Space;
 
-    [SerializeField]private KeyCode blue = KeyCode.Q;
-    [SerializeField]private KeyCode violet = KeyCode.W;
-    [SerializeField]private KeyCode red = KeyCode.E;
-    [SerializeField]private KeyCode green = KeyCode.R;
+    [SerializeField]private KeyCode _downKeycode;
+    [SerializeField]private KeyCode _upKeycode;
+    [SerializeField]private KeyCode _rightKeycode;
+    [SerializeField]private KeyCode _leftKeycode;
 
     [SerializeField] private int _points;
 
@@ -20,7 +20,7 @@ public class Inputs : MonoBehaviour
     [SerializeField] private bool _hasPressed = false;
     private PerfectHitbox perfect;
     private TimingSign sign;
-    [SerializeField] Colors keyPressed;
+    [SerializeField] NoteDirection keyPressed;
 
     [SerializeField] private PlayerAnimations _playerAnimations;
 
@@ -40,37 +40,37 @@ public class Inputs : MonoBehaviour
             _hasPressed = false;
         }*/
         
-        if (Input.GetKey(blue))
+        if (Input.GetKey(_downKeycode))
         {
-           keyPressed=Colors.Blue;
+           keyPressed=NoteDirection.Down;
             _hasPressed = true;
            return;
         }
-        if(Input.GetKey(violet))
+        if(Input.GetKey(_upKeycode))
         {
-           keyPressed=Colors.Violet;
+           keyPressed=NoteDirection.Up;
             _hasPressed = true;
             return;
         }
-        if(Input.GetKey(red))
+        if(Input.GetKey(_rightKeycode))
         {
-            keyPressed=Colors.Red;
+            keyPressed=NoteDirection.Right;
             _hasPressed = true;
             return;
         }   
-        if(Input.GetKey(green))
+        if(Input.GetKey(_leftKeycode))
         {
-            keyPressed=Colors.Green;
+            keyPressed=NoteDirection.Left;
             _hasPressed = true;
             return;
         }
 
-        /*if (keyPressed !=Colors.none)
+        /*if (keyPressed !=NoteDirection.none)
         {
             _playerAnimations.ChangeAnimation(keyPressed);
             print("asd");
         }*/
-        keyPressed =Colors.none;
+        keyPressed =NoteDirection.none;
         _hasPressed = false;
 
     }
@@ -83,7 +83,7 @@ public class Inputs : MonoBehaviour
 
             if (_hasPressed && note._isActive)
             {
-                if(note.noteColor == keyPressed)
+                if(note.noteDirection == keyPressed)
                 {
                     if(perfect.touch)
                     {
@@ -104,8 +104,9 @@ public class Inputs : MonoBehaviour
                 {
                     OnLosePoints(10);
                     note._isActive = false;
+                    _playerAnimations.ChangeAnimation(keyPressed, true);
                 }
-                keyPressed = Colors.none;
+                keyPressed = NoteDirection.none;
                 _hasPressed = false;
             }
         }
