@@ -39,24 +39,25 @@ public class SpawnPoint : MonoBehaviour
         float songTime = audioSource.time;
 
         // Asegúrate de que el índice esté dentro del rango del diccionario.
-        if (index > 0 && index <= miDiccionario.Count)
+        if (index <= 0 || index > miDiccionario.Count)
         {
+            return;
+        }
 
-            int noteNum = miDiccionario[index].Item1;
-            float noteTimer = miDiccionario[index].Item2;
-            int noteType = miDiccionario[index].Item3;
+        int noteNum = miDiccionario[index].Item1;
+        float noteTimer = miDiccionario[index].Item2;
+        int noteType = miDiccionario[index].Item3;
             
-            // Ajusta el margen de tiempo permitido para la aparición de la nota.
-            if (Mathf.Abs(songTime - noteTimer) < 0.1f)
-            {
-                SpawnNote(noteNum, noteTimer, noteType);
-            }
-            else
-            {
-                //print(songTime- noteTimer);
-                //print(songTime);
-                //print(noteTimer);
-            }
+        // Ajusta el margen de tiempo permitido para la aparición de la nota.
+        if (songTime >= noteTimer)
+        {
+            SpawnNote(noteNum, noteTimer, noteType);
+        }
+        else
+        {
+            print($"SongTime - note timer: {songTime- noteTimer}");
+            print($"SongTime: {songTime}");
+            print($"SongTime: {noteTimer}");
         }
     }
 
