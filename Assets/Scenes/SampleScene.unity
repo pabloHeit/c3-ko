@@ -1212,8 +1212,8 @@ SpriteRenderer:
   m_SortingLayerID: 319431537
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.023584902, b: 0.023584902, a: 1}
+  m_Sprite: {fileID: 1912111846, guid: d86f46b90d5e19243a2ef794ccdb4c66, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1656,9 +1656,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8aa70e0ef8d504ea7510368ea16bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack1: {fileID: 21300000, guid: b684c3bc903911b43911975f62418bd9, type: 3}
-  attack2: {fileID: 21300000, guid: aab730b1278cd264e9e6f7545de0061d, type: 3}
-  attack3: {fileID: 21300000, guid: c2244efe8bb5f7f488331c757b973ab2, type: 3}
+  attack1: {fileID: -1001407970, guid: ae2d198d2cae18240931b150ca8cd107, type: 3}
+  attack2: {fileID: 1123618588, guid: ae2d198d2cae18240931b150ca8cd107, type: 3}
+  attack3: {fileID: 682807036, guid: ae2d198d2cae18240931b150ca8cd107, type: 3}
+  attack4: {fileID: 881828013, guid: ae2d198d2cae18240931b150ca8cd107, type: 3}
   empty: {fileID: 0}
 --- !u!1 &1464936540
 GameObject:
@@ -1993,7 +1994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseScreen: {fileID: 349018118}
-  _music: {fileID: 0}
+  _music: {fileID: 1836075906}
 --- !u!4 &1499012856
 Transform:
   m_ObjectHideFlags: 0
@@ -2639,8 +2640,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5e277c7463ee6ca4896a7e497aa30a41, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2693,6 +2694,7 @@ MonoBehaviour:
   _missedSound: {fileID: 8300000, guid: faf789d9d96eaba4791cf5fc62dc0f3f, type: 3}
   _goodSound: {fileID: 8300000, guid: e43aec721e7746e4a80412d9f581d4ac, type: 3}
   _perfectSound: {fileID: 8300000, guid: e43aec721e7746e4a80412d9f581d4ac, type: 3}
+  _enemyAnimator: {fileID: 0}
 --- !u!61 &1997506096
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2706,7 +2708,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02283001, y: 0}
+  m_Offset: {x: 0.15645099, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2717,7 +2719,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6164541, y: 1}
+  m_Size: {x: 1.19, y: 1.58}
   m_EdgeRadius: 0
 --- !u!1 &2008341803
 GameObject:

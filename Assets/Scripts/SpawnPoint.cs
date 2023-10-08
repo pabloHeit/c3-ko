@@ -41,10 +41,10 @@ public class SpawnPoint : MonoBehaviour
     void Update()
     {
         realTime += Time.deltaTime;
-
+        
         CheckNoteSpawn();
-        print($"realTime: {realTime}");
-        print($"timeToReachInput: {timeToReachInput}");
+        //print($"realTime: {realTime}");
+        //print($"timeToReachInput: {timeToReachInput}");
 
         if (realTime >= timeToReachInput)
         {
@@ -72,6 +72,7 @@ public class SpawnPoint : MonoBehaviour
         // Ajusta el margen de tiempo permitido para la aparición de la nota.
         if (realTime >= noteTimer)
         {
+            print(noteTimer);
             SpawnNote(noteNum, noteTimer, noteType);
         }
         else
@@ -143,9 +144,15 @@ public class SpawnPoint : MonoBehaviour
         {
             string[] lines = _textFile.text.Split('\n');
 
+            int indexReal = 1;
+
             for (int i = 0; i < lines.Length; i++)
             {
-                int keyQuantity = lines.Length;
+                if (string.IsNullOrEmpty(lines[i].Trim()))
+                {
+                    continue;
+                }
+
                 string[] keyValue = lines[i].Trim().Split('/');
 
                 if (keyValue.Length == 3)
@@ -154,17 +161,19 @@ public class SpawnPoint : MonoBehaviour
                     float noteTime = float.Parse(keyValue[1].Trim());
                     //noteTime = GetRealNoteTime(noteTime);
                     int noteType = int.Parse(keyValue[2].Trim());
-                    miDiccionario[i + 1] = (noteDirection, noteTime, noteType);
+                    miDiccionario[indexReal] = (noteDirection, noteTime, noteType);
                 }
+
+                indexReal++;
             }
 
             miDiccionario[miDiccionario.Count + 1] = (-1, -1, 1);
 
-            /*Debug.Log("Notas musicales: ");
+            Debug.Log("Notas musicales: ");
             foreach (KeyValuePair<int, (int, float, int)> kvp in miDiccionario)
             {
                 Debug.Log("Clave: " + kvp.Key + ", Valor: " + kvp.Value);
-            }*/
+            }
         }
         else
         {

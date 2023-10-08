@@ -56,9 +56,9 @@ TagManager:
   - name: UI
     uniqueID: 3439159371
     locked: 0
-  - name: Screens
-    uniqueID: 2073173675
-    locked: 0
   - name: Notes
     uniqueID: 2523440431
+    locked: 0
+  - name: Screens
+    uniqueID: 2073173675
     locked: 0
