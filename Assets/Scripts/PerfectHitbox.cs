@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PerfectHitbox : MonoBehaviour
 {
-    [SerializeField] public bool touch;
+    [SerializeField] public bool touch=false;
     // Update is called once per frame
     void Update()
     {
@@ -14,6 +14,7 @@ public class PerfectHitbox : MonoBehaviour
 
         Note note = other.gameObject.GetComponent<Note>();
 
+        
         touch=true;
         
     }

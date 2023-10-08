@@ -16,23 +16,31 @@ public class Note : MonoBehaviour
     private Transform _sliderEraser;
     [SerializeField] private float _sliderEraserSize;
     public Colors noteColor;
-
+    [SerializeField] private bool hasStarted;
+    [SerializeField] private float beatTempo;
 
 
     [Header("Components")]
     private Rigidbody2D _noteRb;   
 
-     private void Awake()
+    private void Awake()
     {
-        _noteRb = GetComponent<Rigidbody2D>();
-        _noteRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        
+        
+    }
+    
+    private void Start() {
+        beatTempo=beatTempo/60;
+    }
+
+    void Update () {
+      
+                transform.position -= new Vector3 ( beatTempo * Time.deltaTime, 0f, 0f);
+            
         
     }
 
-    private void Start() {
-        Vector2 direction = Vector2.left;
-        _noteRb.velocity = direction * _speed;
-    }
+
 
     public void OnPressed(Transform inputPosition){
 

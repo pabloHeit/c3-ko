@@ -19,11 +19,12 @@ public class Inputs : MonoBehaviour
     [SerializeField] private bool _onCollision = false;
     [SerializeField] private bool _hasPressed = false;
     private PerfectHitbox perfect;
-
+    private TimingSign sign;
     [SerializeField] Colors keyPressed;
 
     private void Awake() {
         perfect = FindObjectOfType<PerfectHitbox>();
+        sign = FindObjectOfType<TimingSign>();
     }
 
     private void Update(){
@@ -35,7 +36,7 @@ public class Inputs : MonoBehaviour
             OnLosePoints(10);
             _hasPressed = false;
         }*/
-
+        
         if (Input.GetKey(blue))
         {
            keyPressed=Colors.Blue;
@@ -75,8 +76,19 @@ public class Inputs : MonoBehaviour
             {
                 if(note.noteColor == keyPressed)
                 {
+                    if(perfect.touch)
+                    {
+                        OnGetPoints(30);
+                        sign.ChangeSprite(sign.perfect);
+                    }
+                    else
+                    {
+                        OnGetPoints(15);
+                        sign.ChangeSprite(sign.good);
+                    }
+                    perfect.touch=false;
                     note.OnPressed(transform);
-                    OnGetPoints(15);
+                    
                 }
                 else
                 {
