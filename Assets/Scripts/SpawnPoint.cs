@@ -50,12 +50,7 @@ public class SpawnPoint : MonoBehaviour
         {
             SpawnNote(noteNum, noteTimer, noteType);
         }
-        else
-        {
-            print($"SongTime - note timer: {songTime- noteTimer}");
-            print($"SongTime: {songTime}");
-            print($"SongTime: {noteTimer}");
-        }
+        
     }
 
     private void SpawnNote(int noteNum, float noteTimer, int noteType)
