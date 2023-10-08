@@ -22,9 +22,12 @@ public class Inputs : MonoBehaviour
     private TimingSign sign;
     [SerializeField] Colors keyPressed;
 
+    [SerializeField] private PlayerAnimations _playerAnimations;
+
     private void Awake() {
         perfect = FindObjectOfType<PerfectHitbox>();
         sign = FindObjectOfType<TimingSign>();
+
     }
 
     private void Update(){
@@ -61,7 +64,13 @@ public class Inputs : MonoBehaviour
             _hasPressed = true;
             return;
         }
-        keyPressed=Colors.none;
+
+        /*if (keyPressed !=Colors.none)
+        {
+            _playerAnimations.ChangeAnimation(keyPressed);
+            print("asd");
+        }*/
+        keyPressed =Colors.none;
         _hasPressed = false;
 
     }
@@ -88,7 +97,8 @@ public class Inputs : MonoBehaviour
                     }
                     perfect.touch=false;
                     note.OnPressed(transform);
-                    
+
+                    _playerAnimations.ChangeAnimation(keyPressed);
                 }
                 else
                 {

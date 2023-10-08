@@ -48,9 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _isActive: 1
   _isSlider: 0
   _sliderEraserSize: 0
   noteColor: 1
+  hasStarted: 0
+  beatTempo: 0
 --- !u!212 &1058846576939042064
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -25,7 +25,8 @@ public class SpawnPoint : MonoBehaviour
     {
         ConvertTxtToDictionary();
 
-            audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -40,6 +41,7 @@ public class SpawnPoint : MonoBehaviour
         // Asegúrate de que el índice esté dentro del rango del diccionario.
         if (index > 0 && index <= miDiccionario.Count)
         {
+
             int noteNum = miDiccionario[index].Item1;
             float noteTimer = miDiccionario[index].Item2;
             int noteType = miDiccionario[index].Item3;
@@ -51,9 +53,9 @@ public class SpawnPoint : MonoBehaviour
             }
             else
             {
-                print(songTime- noteTimer);
-                print(songTime);
-                print(noteTimer);
+                //print(songTime- noteTimer);
+                //print(songTime);
+                //print(noteTimer);
             }
         }
     }
@@ -135,11 +137,11 @@ public class SpawnPoint : MonoBehaviour
 
             miDiccionario[miDiccionario.Count + 1] = (-1, -1, 1);
 
-            Debug.Log("Notas musicales: ");
+            /*Debug.Log("Notas musicales: ");
             foreach (KeyValuePair<int, (int, float, int)> kvp in miDiccionario)
             {
                 Debug.Log("Clave: " + kvp.Key + ", Valor: " + kvp.Value);
-            }
+            }*/
         }
         else
         {
